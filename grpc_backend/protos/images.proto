@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package images;
+
+service ImagesService {
+  // RPC para obter uma lista de imagens
+  rpc GetImages(google.protobuf.Empty) returns (ImageListResponse);
+}
+
+// Mensagem da resposta (modelo da imagem)
+message Image {
+  string id = 1;
+  string url = 2;
+  string description = 3;
+}
+
+// Mensagem da resposta (lista de imagens)
+message ImageListResponse {
+  repeated Image images = 1;
+}
