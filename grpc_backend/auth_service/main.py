@@ -20,9 +20,9 @@ ALGORITHM = "RS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 # --- Carregando as Chaves ---
-with open("private_key.pem", "rb") as f:
+with open("auth_service/private_key.pem", "rb") as f:
     private_key = f.read()
-with open("public_key.pem", "rb") as f:
+with open("auth_service/public_key.pem", "rb") as f:
     public_key = f.read()
 
 key_obj = jwk.construct(public_key, algorithm=ALGORITHM)
@@ -42,7 +42,7 @@ fake_users_db = {
         "disabled": False,
     }
 }
-
+hashed_password = pwd_context.hash("wonderland")
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
@@ -89,7 +89,6 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         )
     access_token = create_access_token(data={"sub": user["username"]})
     return {"access_token": access_token, "token_type": "bearer"}
-
 @app.get("/.well-known/jwks.json")
 async def jwks():
     """Expõe a chave pública no formato JWK para verificação por outros serviços."""

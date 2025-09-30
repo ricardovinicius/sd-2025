@@ -1,0 +1,18 @@
+syntax = "proto3";
+package images;
+
+service ImagesService {
+  rpc GetImages(Empty) returns (ImagesList);
+}
+
+message Empty {}
+
+message Image {
+  string id = 1;
+  string url = 2;
+  string description = 3;
+}
+
+message ImagesList {
+  repeated Image images = 1;
+}
