@@ -3,10 +3,9 @@
 import grpc
 import warnings
 
-from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 import images_pb2 as images__pb2
 
-GRPC_GENERATED_VERSION = '1.75.0'
+GRPC_GENERATED_VERSION = '1.75.1'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -27,7 +26,8 @@ if _version_not_supported:
 
 
 class ImagesServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """Serviço de imagens
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -37,16 +37,17 @@ class ImagesServiceStub(object):
         """
         self.GetImages = channel.unary_unary(
                 '/images.ImagesService/GetImages',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=images__pb2.ImageListResponse.FromString,
+                request_serializer=images__pb2.Empty.SerializeToString,
+                response_deserializer=images__pb2.ImagesList.FromString,
                 _registered_method=True)
 
 
 class ImagesServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """Serviço de imagens
+    """
 
     def GetImages(self, request, context):
-        """RPC para obter uma lista de imagens
+        """Retorna lista de imagens
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -57,8 +58,8 @@ def add_ImagesServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetImages': grpc.unary_unary_rpc_method_handler(
                     servicer.GetImages,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=images__pb2.ImageListResponse.SerializeToString,
+                    request_deserializer=images__pb2.Empty.FromString,
+                    response_serializer=images__pb2.ImagesList.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -69,7 +70,8 @@ def add_ImagesServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class ImagesService(object):
-    """Missing associated documentation comment in .proto file."""
+    """Serviço de imagens
+    """
 
     @staticmethod
     def GetImages(request,
@@ -86,8 +88,8 @@ class ImagesService(object):
             request,
             target,
             '/images.ImagesService/GetImages',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            images__pb2.ImageListResponse.FromString,
+            images__pb2.Empty.SerializeToString,
+            images__pb2.ImagesList.FromString,
             options,
             channel_credentials,
             insecure,

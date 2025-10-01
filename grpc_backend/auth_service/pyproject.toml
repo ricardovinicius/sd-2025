@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "fastapi[standard]",
-    "python-jose[cryptography]",
-    "passlib[bcrypt]"
+    "grpcio",
+    "pyjwt[crypto]",
+    "grpcio-tools"
 ]
